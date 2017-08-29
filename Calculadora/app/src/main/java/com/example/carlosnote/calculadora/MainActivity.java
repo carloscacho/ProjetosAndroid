@@ -61,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
 //                setPositiveButton("OK",null).show();
 
         //mensagem que surge na tela e fica por um tempo determinado
-        Toast toast = Toast.makeText(this,"O campo de numero1  ou numero2 está em branco", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(this,
+                "O campo de numero1  ou numero2 está em branco",
+                Toast.LENGTH_LONG);
         toast.show();
     }
 }

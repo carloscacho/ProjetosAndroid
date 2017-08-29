@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Lembrete</string>
+    <string name="lbl_salvar">Salvar</string>
+    <string name="lbl_fechar">Fechar</string>
+</resources>
