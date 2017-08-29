@@ -1,6 +1,6 @@
 # ProjetosAndroid
 
 Projetos desevolvidos nas aula
-**Tecnologia em analise e desevolcimento de sistema - TAD**
+**C.S.T. em Análise e Desenvolvimento de Sistemas - TAD**
 [**UNIVAG**](http://www.univag.com.br/)
 ----------
