@@ -15,8 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.carlosnote.contatos.Model.Dominio.RepositorioContatos;
 import com.example.carlosnote.contatos.Model.SingletonContatos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListActivity extends AppCompatActivity implements View.OnClickListener{
@@ -26,6 +28,8 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
     private ListView lsvContatos;
     private ArrayAdapter<String> arrayContatos;
     private FloatingActionButton fab;
+
+    private RepositorioContatos repositorioContatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +55,21 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
         btnLimpar.setOnClickListener(this);
 
         //criar o banco
-        SQLiteDatabase conex = SingletonContatos.getInstance(this);
+        repositorioContatos = new RepositorioContatos(this);
+
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //getContatos
+        ArrayList<String> listContatos = new ArrayList<>();
+        listContatos = repositorioContatos.getListContatos();
+        arrayContatos.clear();
+        arrayContatos.addAll(listContatos);
+    }
 
     @Override
     public void onClick(View view) {

@@ -3,15 +3,19 @@ package com.example.carlosnote.contatos;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.example.carlosnote.contatos.Model.Dominio.Contato;
+import com.example.carlosnote.contatos.Model.Dominio.RepositorioContatos;
+
 import java.util.ArrayList;
 
-public class AddContatoActivity extends AppCompatActivity {
+public class AddContatoActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText edtNome;
     private EditText edtTelefone;
     private EditText edtData;
@@ -24,6 +28,8 @@ public class AddContatoActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> arrayTelefone;
     private ArrayAdapter<String> arrayData;
+
+    private RepositorioContatos contatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +61,30 @@ public class AddContatoActivity extends AppCompatActivity {
 
 
 
+        contatos = new RepositorioContatos(this);
+        btnSalvar.setOnClickListener(this);
+    }
 
+    @Override
+    public void onClick(View view) {
+        if(view.getId() ==  R.id.fabSalvar){
+            salvarDados();
+        }
+    }
+
+    public void salvarDados(){
+        Contato contato = new Contato();
+        contato.setNome(edtNome.getText().toString());
+        contato.setTelefone(edtTelefone.getText().toString());
+        contato.setDataEspecial(edtData.getText().toString());
+
+        //spn
+        contato.setTipoData(spnData.getSelectedItemPosition());
+        contato.setTipoTelefone(spnTelefone.getSelectedItemPosition());
+
+        contatos.insertContato(contato);
+
+        finish();
 
     }
 }

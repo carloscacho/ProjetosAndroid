@@ -17,7 +17,7 @@ public class SingletonContatos {
     private SingletonContatos(Context context){
         try {
             DataBase dataBase = new DataBase(context);
-            conex = dataBase.getWritableDatabase();
+            instance.conex = dataBase.getWritableDatabase();
             Log.i("#Banco", "O Banco foi criado com sucesso");
         }catch (SQLException ex){
             ex.printStackTrace();
