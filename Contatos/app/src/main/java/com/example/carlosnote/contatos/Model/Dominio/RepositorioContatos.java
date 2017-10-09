@@ -45,7 +45,7 @@ public class RepositorioContatos {
     public ArrayList<String> getListContatos(){
         ArrayList<String> contatos = new ArrayList<String>();
 
-        Cursor cursor = conexao.query("CONTATOS",null,null,null,null,null,null);
+        Cursor cursor = conexao.query("CONTATOS",null,null,null,null,null,"NOME COLLATE NOCASE");
 
         if(cursor.getCount() > 0){
             cursor.moveToFirst();

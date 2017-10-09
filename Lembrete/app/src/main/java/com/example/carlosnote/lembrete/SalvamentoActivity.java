@@ -30,7 +30,7 @@ public class SalvamentoActivity extends AppCompatActivity implements View.OnClic
         lsvLembretes.setAdapter(arrayLembretes);
 
         //receber os paramentros
-        Bundle bundle = getIntent().getExtras();
+        //Bundle bundle = getIntent().getExtras();
 
         //SALVAMENTO DE STRING
         //String lembrenteRecebido = bundle.getString("conteudo");
@@ -39,10 +39,14 @@ public class SalvamentoActivity extends AppCompatActivity implements View.OnClic
         //arrayLembretes.add(lembrenteRecebido);
 
         //salvamento de lista
-        ArrayList<String> lembretes = bundle.getStringArrayList("conteudo");
+        //ArrayList<String> lembretes = bundle.getStringArrayList("conteudo");
 
-        arrayLembretes.addAll(lembretes);
+        //arrayLembretes.addAll(lembretes);
 
+
+        //TODO Ler as informações do BANCO
+
+        //TODO alimetar a arrayLembretes com o contéudo da lista
 
     }
 

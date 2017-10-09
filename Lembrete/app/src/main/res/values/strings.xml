@@ -2,4 +2,8 @@
     <string name="app_name">Lembrete</string>
     <string name="lbl_salvar">Salvar</string>
     <string name="lbl_fechar">Fechar</string>
+    <string name="lbl_lembrete">Lembrete</string>
+    <string name="lbl_data"> Data do Lembrete </string>
+    <string name="lbl_urgente">Urgente</string>
+    <string name="lbl_listar">Listar Lembretes</string>
 </resources>
