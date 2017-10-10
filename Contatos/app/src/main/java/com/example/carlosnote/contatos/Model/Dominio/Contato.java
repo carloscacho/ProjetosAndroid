@@ -8,6 +8,15 @@ import java.io.Serializable;
 
 public class Contato implements Serializable {
 
+    public static int ID = 0;
+    public static int NOME = 1;
+    public static int TELEFONE = 2;
+    public static int TIPOTELEFONE = 3;
+    public static int DATAESP = 4;
+    public static int TIPODATAESP = 5;
+
+
+
     private int id;
     private String nome;
     private String telefone;
@@ -16,7 +25,7 @@ public class Contato implements Serializable {
     private int tipoData;
 
     public Contato(){
-        //nada
+        id = 0;
     }
 
     public Contato(int id, String nome,
@@ -77,5 +86,10 @@ public class Contato implements Serializable {
 
     public void setTipoData(int tipoData) {
         this.tipoData = tipoData;
+    }
+
+    @Override
+    public String toString() {
+        return nome + "\n" + telefone;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.carlosnote.contatos;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,8 @@ public class AddContatoActivity extends AppCompatActivity implements View.OnClic
     private ArrayAdapter<String> arrayData;
 
     private RepositorioContatos contatos;
+
+    private Contato contatoUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,15 @@ public class AddContatoActivity extends AppCompatActivity implements View.OnClic
 
         contatos = new RepositorioContatos(this);
         btnSalvar.setOnClickListener(this);
+
+        Intent it = getIntent();
+        if(it.getExtras() != null && it.getExtras().containsKey("contato")){
+            contatoUp = (Contato) it.getExtras().getSerializable("contato");
+            preecherDados();
+        }else {
+            contatoUp = new Contato();
+        }
+
     }
 
     @Override
@@ -74,6 +86,7 @@ public class AddContatoActivity extends AppCompatActivity implements View.OnClic
 
     public void salvarDados(){
         Contato contato = new Contato();
+        contato.setId(contatoUp.getId());
         contato.setNome(edtNome.getText().toString());
         contato.setTelefone(edtTelefone.getText().toString());
         contato.setDataEspecial(edtData.getText().toString());
@@ -82,9 +95,21 @@ public class AddContatoActivity extends AppCompatActivity implements View.OnClic
         contato.setTipoData(spnData.getSelectedItemPosition());
         contato.setTipoTelefone(spnTelefone.getSelectedItemPosition());
 
-        contatos.insertContato(contato);
+        if(contatoUp.getId() == 0 )
+            contatos.insertContato(contato);
+        else
+            contatos.updateContato(contato);
 
         finish();
 
+    }
+
+    public void preecherDados(){
+        edtNome.setText(contatoUp.getNome());
+        edtTelefone.setText(contatoUp.getTelefone());
+        edtData.setText(contatoUp.getDataEspecial());
+
+        spnData.setVerticalScrollbarPosition(contatoUp.getTipoData());
+        spnTelefone.setVerticalScrollbarPosition(contatoUp.getTipoTelefone());
     }
 }

@@ -42,8 +42,36 @@ public class RepositorioContatos {
 
     }
 
-    public ArrayList<String> getListContatos(){
-        ArrayList<String> contatos = new ArrayList<String>();
+    public boolean updateContato(Contato contato){
+        try{
+            ContentValues value = new ContentValues();
+            value.put("NOME", contato.getNome());
+            value.put("TELEFONE", contato.getTelefone());
+            value.put("SPNTELEFONE", contato.getTipoTelefone());
+            value.put("DATASESP", contato.getDataEspecial());
+            value.put("SPNDATASESP", contato.getTipoData());
+
+            String[] ids = new String[]{String.valueOf(contato.getId())};
+
+            conexao.update("CONTATOS",value,"_id = ?", ids);
+            return true;
+        }catch (SQLException ex){
+            Log.e("Erro ao atualizar", ex.getMessage());
+            return false;
+        }
+
+
+    }
+
+    public void deleteContato(Contato contato){
+        String[] ids = new String[]{String.valueOf(contato.getId())};
+        conexao.delete("CONTATOS","_id = ?", ids);
+    }
+
+
+
+    public ArrayList<Contato> getListContatos(){
+        ArrayList<Contato> contatos = new ArrayList<Contato>();
 
         Cursor cursor = conexao.query("CONTATOS",null,null,null,null,null,"NOME COLLATE NOCASE");
 
@@ -51,9 +79,19 @@ public class RepositorioContatos {
             cursor.moveToFirst();
 
             do{
-                String nome = cursor.getString(1);
-                String telefone = cursor.getString(2);
-                contatos.add(nome + "\n" + telefone);
+                int id = cursor.getInt(Contato.ID);
+                String nome = cursor.getString(Contato.NOME);
+                String telefone = cursor.getString(Contato.TELEFONE);
+                String data = cursor.getString(Contato.DATAESP);
+
+                //spn
+                int tipoTelefone = cursor.getInt(Contato.TIPOTELEFONE);
+                int tipoData = cursor.getInt(Contato.TIPODATAESP);
+
+                //criando e addicionando contato
+                Contato tempContato = new Contato(id,nome,telefone,tipoTelefone,data,tipoData);
+                contatos.add(tempContato);
+
             }while (cursor.moveToNext());
         }
         return contatos;
