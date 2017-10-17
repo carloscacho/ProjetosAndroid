@@ -9,6 +9,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +38,8 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
     private RepositorioContatos repositorioContatos;
 
     private Contato deleteOrUpdate;
+
+    private BuscaContatos busca;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,9 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
         //habilitar o click longo
         lsvContatos.setOnItemLongClickListener(this);
 
+        //habilitar a busca
+        busca = new BuscaContatos();
+        edtPesquisa.addTextChangedListener(busca);
 
     }
 
@@ -133,5 +140,23 @@ public class ListActivity extends AppCompatActivity implements View.OnClickListe
         it.putExtra("contato", deleteOrUpdate);
         //chamar a outra tela
         startActivity(it);
+    }
+
+    public class BuscaContatos implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            //Busca no array de contatos lidos do banco
+            arrayContatos.getFilter().filter(charSequence);
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
     }
 }
