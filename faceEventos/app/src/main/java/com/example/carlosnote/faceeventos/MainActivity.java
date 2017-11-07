@@ -1,15 +1,28 @@
 package com.example.carlosnote.faceeventos;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnLogout;
+    private TextView txtNome;
+    private TextView txtEmail;
+    private ImageView imgFoto;
+    private ListView lsvEventos;
+    private ArrayAdapter arrayEventos;
 
 
     @Override
@@ -17,19 +30,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(AccessToken.getCurrentAccessToken() == null){
-            goLoginPage();
-        }
+//        if(AccessToken.getCurrentAccessToken() == null){
+//
+//            goLoginPage();
+//        }
+
+
+
+        txtNome = (TextView) findViewById(R.id.txtNome);
+        txtEmail = (TextView) findViewById(R.id.txtEmail);
+        imgFoto = (ImageView) findViewById(R.id.imgFoto);
+        lsvEventos = (ListView) findViewById(R.id.lsvEventos);
 
         btnLogout = (Button) findViewById(R.id.btnLogout);
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                LoginManager.getInstance().logOut();
                 goLoginPage();
             }
         });
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            String nome = user.getDisplayName();
+            String email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
+
+            txtNome.setText(nome);
+            txtEmail.setText(email);
+            imgFoto.setImageURI(photoUrl);
+        }else{
+            goLoginPage();
+        }
     }
 
     private void goLoginPage(){

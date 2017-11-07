@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1058866624088",
+    "firebase_url": "https://listevents-f1f81.firebaseio.com",
+    "project_id": "listevents-f1f81",
+    "storage_bucket": "listevents-f1f81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058866624088:android:0ab2ee4925d7465a",
+        "android_client_info": {
+          "package_name": "com.example.carlosnote.faceeventos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1058866624088-ffkrd03nhv6hqq0scv4eh5ud7fp2nmib.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.carlosnote.faceeventos",
+            "certificate_hash": "8ea431021eabc4fc86e9e699f20ea272bffda842"
+          }
+        },
+        {
+          "client_id": "1058866624088-jtitava9dqg3b4lnpl8cai8c37n9f764.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFTNbofM133QSj0SVScoz2TKiXHN_IFRU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1058866624088-jtitava9dqg3b4lnpl8cai8c37n9f764.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
