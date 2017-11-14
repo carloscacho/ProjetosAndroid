@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -61,10 +64,33 @@ public class MainActivity extends AppCompatActivity {
 
             txtNome.setText(nome);
             txtEmail.setText(email);
-            imgFoto.setImageURI(photoUrl);
+            //imgFoto.setImageURI(photoUrl);
+            Glide.with(this)
+                    .load(photoUrl) // the uri you got from Firebase
+                    .centerCrop()
+                    .into(imgFoto);
+
         }else{
             goLoginPage();
         }
+
+        GraphRequest request = GraphRequest.newGraphPathRequest(
+                AccessToken.getCurrentAccessToken(),
+                "/search",
+                new GraphRequest.Callback() {
+                    @Override
+                    public void onCompleted(GraphResponse response) {
+                        // Insert your code here
+                    }
+                });
+
+        Bundle parameters = new Bundle();
+        parameters.putString("q", "cuiaba");
+        parameters.putString("type", "event");
+        parameters.putString("fields", "name,place,attending_count,cover,description,noreply_count,maybe_count");
+        request.setParameters(parameters);
+        request.executeAsync();
+
     }
 
     private void goLoginPage(){
